@@ -201,7 +201,7 @@ export default function Admin({id}: routeIdProps) {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {barberSelected != {} ? (
+                                    {barberSelected != null ? (
                                         <>
                                             {barber.batista.map(hora => {
                                                 return (
