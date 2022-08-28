@@ -151,13 +151,13 @@ const Hours = {
 }
 
 interface routeIdProps {
-    id: string;
+    id: string & undefined;
 }
 
 
-export default function Admin({ id }: routeIdProps) {
+export default function Admin({id}:routeIdProps) {
     const [routeScheduleBarber, setRouteScheduleBarber] = useState(false);
-    const [whichRoute, setWhichRoute] = useState(id)
+    const [whichRoute, setWhichRoute] = useState<string>(id)
 
     const [barber, setBarber] = useState(Hours);
     const [barberSelected, setBarberSelected] = useState({})
@@ -177,7 +177,7 @@ export default function Admin({ id }: routeIdProps) {
 
     return (
         <>
-            <Navbar page='admin' setWhichRoute={setWhichRoute} />
+            <Navbar page='admin'  />
             <Container>
                 {!routeScheduleBarber ? (
                     <ContainerAgenda>

@@ -13,14 +13,9 @@ import {
 
 interface navbarProps {
     page: string;
-    setWhichRoute: React.Dispatch<React.SetStateAction<string>>;
 }
 
-interface routeNavbarProps {
-    setWhichRoute: React.Dispatch<React.SetStateAction<string>>;
-}
-
-export function Navbar({ page }: navbarProps, { setWhichRoute }: routeNavbarProps) {
+export function Navbar({ page }: navbarProps, setWhichRoute: React.Dispatch<React.SetStateAction<string>> ) {
     return (
         <Container>
             <ContainerAdminTitle>
