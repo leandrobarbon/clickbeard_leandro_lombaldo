@@ -1,7 +1,7 @@
 import { prisma } from "./db";
 
 export async function getLoginDB() {
-    return prisma.public_login.findMany();
+    return prisma.public_register.findMany();
 }
 
 export async function registerClientDB( r_name: string, r_email: string, r_password: string) {

@@ -9,20 +9,21 @@ datasource db {
 
 model public_login {
   l_id            Int             @id(map: "login_pk")
+  l_fk_id         Int
   l_name          String          @db.VarChar(70)
   l_email         String          @db.VarChar(70)
   l_password      String          @db.VarChar(70)
-  public_register public_register @relation(fields: [l_id], references: [r_id], onDelete: NoAction, onUpdate: NoAction, map: "login_fk0")
+  public_register public_register @relation(fields: [l_fk_id], references: [r_id], onDelete: NoAction, onUpdate: NoAction, map: "login_fk0")
 
   @@map("public.login")
 }
 
 model public_register {
-  r_id         Int           @id(map: "register_pk") @default(autoincrement())
-  r_name       String        @db.VarChar(50)
-  r_email      String        @unique @db.VarChar(70)
-  r_password   String        @db.VarChar(70)
-  public_login public_login?
+  r_id         Int            @id(map: "register_pk") @default(autoincrement())
+  r_name       String         @db.VarChar(50)
+  r_email      String         @unique @db.VarChar(70)
+  r_password   String         @db.VarChar(70)
+  public_login public_login[]
 
   @@map("public.register")
 }
