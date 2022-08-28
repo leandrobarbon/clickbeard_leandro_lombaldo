@@ -1,6 +1,6 @@
+import React, { useState, useEffect } from 'react';
 import { Navbar } from 'components/Navbar';
 import { Cancelar, Reagendar } from 'Icons';
-import { useState, useEffect } from 'react';
 import {
     Container,
     ContainerScheduling,
@@ -11,7 +11,7 @@ import {
 } from '../styles/homeCliente';
 
 
-export default function homeCliente() {
+export default function HomeCliente() {
     const [dados, setDados] = useState(true)
 
     useEffect(() => {
