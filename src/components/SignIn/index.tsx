@@ -16,17 +16,7 @@ interface dadosClientProps {
 export function SignIn() {
     const [RegisterMe, setRegisterMe] = useState(false);
     const [registed, setRegistrated] = useState([])
-    const [dadosClient, setDadosClient] = useState<dadosClientProps>({
-        nome: '',
-        email: '',
-        senha: ''
-    })
-
-    const [dadosAdmin, setDadosAdmin] = useState<dadosClientProps>({
-        nome: 'Admin',
-        email: 'admin@admin.com.br',
-        senha: 'admin@123'
-    })
+ 
 
     const handleRouteRegister = (event: any) => {
         if (event.id === "cadastro") {
@@ -36,24 +26,14 @@ export function SignIn() {
         }
     }
 
-    console.log(dadosClient);
 
 
     const handleLogin = () => {
 
     }
 
-    useEffect(() => {
-        localStorage.setItem('@admin', JSON.stringify(dadosAdmin));
-    }, [])
-
     const handleSaveRegister = (event: FormEvent) => {
-        event.preventDefault();
-
-        localStorage.setItem('@registed', JSON.stringify(dadosClient));
-
-        let arrLocalRegisted = JSON.parse(localStorage.getItem())
-     
+         
     }
 
 
@@ -85,12 +65,7 @@ export function SignIn() {
                             <input
                                 type="text"
                                 placeholder='nome'
-                                onChange={({ target }) => {
-                                    setDadosClient({
-                                        ...dadosClient,
-                                        nome: target.value,
-                                    });
-                                }}
+                                
                             />
                         </InputText>
                         <InputText>
@@ -98,12 +73,7 @@ export function SignIn() {
                             <input
                                 type="email"
                                 placeholder='email@email.com.br'
-                                onChange={({ target }) => {
-                                    setDadosClient({
-                                        ...dadosClient,
-                                        email: target.value,
-                                    });
-                                }}
+                                
                             />
                         </InputText>
                         <InputText>
@@ -111,12 +81,7 @@ export function SignIn() {
                             <input
                                 type="password"
                                 placeholder='●●●●●●●●●●●'
-                                onChange={({ target }) => {
-                                    setDadosClient({
-                                        ...dadosClient,
-                                        senha: target.value,
-                                    });
-                                }}
+                                
                             />
                         </InputText>
 
