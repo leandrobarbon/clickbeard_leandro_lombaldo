@@ -89,7 +89,7 @@ export default function homeCliente() {
                             </table>
                         </div>
                     ) : (
-                        <Aviso>Não tem histórico de agendamento</Aviso>
+                        <Message>Não tem histórico de agendamento</Message>
                     )}
                 </TableInfo>
             </ContainerHistoricScheduled>
