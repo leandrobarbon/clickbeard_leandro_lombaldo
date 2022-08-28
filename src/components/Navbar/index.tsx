@@ -16,7 +16,11 @@ interface navbarProps {
     setWhichRoute: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export function Navbar({ page, setWhichRoute }: navbarProps) {    
+interface routeNavbarProps {
+    setWhichRoute: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export function Navbar({ page }: navbarProps, { setWhichRoute }: routeNavbarProps) {
     return (
         <Container>
             <ContainerAdminTitle>
@@ -25,8 +29,8 @@ export function Navbar({ page, setWhichRoute }: navbarProps) {
                 {/* Quando na /admin ele ativa mostrando navegação da ageenda e cadastro de barbeiro */}
                 {page === 'admin' ? (
                     <>
-                        <ButtonRoute id="agenda" onClick={({target}:any) => setWhichRoute(target.id)}>Agenda</ButtonRoute>
-                        <ButtonRoute id="cadastBarber" onClick={({target}:any) => setWhichRoute(target.id)}>Cadastrar barbeiro</ButtonRoute>
+                        <ButtonRoute id="agenda" onClick={({ target }: any) => setWhichRoute(target.id)}>Agenda</ButtonRoute>
+                        <ButtonRoute id="cadastBarber" onClick={({ target }: any) => setWhichRoute(target.id)}>Cadastrar barbeiro</ButtonRoute>
                     </>
                 ) : (
                     <></>

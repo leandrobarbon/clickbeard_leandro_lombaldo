@@ -155,7 +155,7 @@ interface routeIdProps {
 }
 
 
-export default function Admin({id}: routeIdProps) {
+export default function Admin({ id }: routeIdProps) {
     const [routeScheduleBarber, setRouteScheduleBarber] = useState(false);
     const [whichRoute, setWhichRoute] = useState(id)
 
@@ -165,10 +165,9 @@ export default function Admin({id}: routeIdProps) {
     const handleSelectBarberSchedule = (event: ChangeEvent<HTMLSelectElement>) => {
         setBarberSelected(event)
     }
-    
+
 
     useEffect(() => {
-        console.log('aqui')
         if (whichRoute === "cadastBarber") {
             setRouteScheduleBarber(true)
         } else {
