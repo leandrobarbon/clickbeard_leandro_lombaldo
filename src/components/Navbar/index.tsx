@@ -25,8 +25,8 @@ export function Navbar({ page, setWhichRoute }: navbarProps) {
                 {/* Quando na /admin ele ativa mostrando navegação da ageenda e cadastro de barbeiro */}
                 {page === 'admin' ? (
                     <>
-                        <ButtonRoute id="agenda" onClick={(e) => setWhichRoute(e.target.id)}>Agenda</ButtonRoute>
-                        <ButtonRoute id="cadastBarber" onClick={(e) => setWhichRoute(e.target.id)}>Cadastrar barbeiro</ButtonRoute>
+                        <ButtonRoute id="agenda" onClick={({target}:any) => setWhichRoute(target.id)}>Agenda</ButtonRoute>
+                        <ButtonRoute id="cadastBarber" onClick={({target}:any) => setWhichRoute(target.id)}>Cadastrar barbeiro</ButtonRoute>
                     </>
                 ) : (
                     <></>

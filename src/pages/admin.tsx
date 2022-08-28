@@ -150,10 +150,14 @@ const Hours = {
     ],
 }
 
+interface routeIdProps {
+    id: string;
+}
 
-export default function Admin() {
+
+export default function Admin({id}: routeIdProps) {
     const [routeScheduleBarber, setRouteScheduleBarber] = useState(false);
-    const [qualRota, setWhichRoute] = useState('')
+    const [qualRota, setWhichRoute] = useState(id)
 
     const [barber, setBarber] = useState(Hours);
     const [barberSelected, setBarberSelected] = useState({})
