@@ -1,34 +1,73 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<p align="center">
+  <img src="https://github.com/leandrobarbon/clickbeard_leandro_lombaldo/blob/main/public/assets/BARBER%20SHOP.png"/>
+</p>
 
-## Getting Started
+#
+<img src="https://github.com/leandrobarbon/clickbeard_leandro_lombaldo/blob/main/public/assets/barbershop-raiz.png" />
+<img src="https://github.com/leandrobarbon/clickbeard_leandro_lombaldo/blob/main/public/assets/barbershop-home.png" />
+<img src="https://github.com/leandrobarbon/clickbeard_leandro_lombaldo/blob/main/public/assets/barbershop-admin.png" />
 
-First, run the development server:
+
+### Figma
+
+ - https://www.figma.com/file/7QvfA5UYoPJI9cIoMB694H/Untitled?node-id=0%3A1
+
+## Tecnologias
+
+Este projeto foi desenvolvido utilizando tecnologias front-end.
+
+
+- [ReactJS](https://reactjs.org/)
+- [Typescript](https://www.typescriptlang.org/)
+- [Next.js](https://nextjs.org/)
+- [Styled-components](https://styled-components.com/)
+- [Prisma](https://www.prisma.io/)
+- [Postgres](https://www.postgresql.org/)
+- [Docker](https://www.docker.com/)
+
+
+
+## 💻 Getting started
+
+### Requirements
+
+- Você preisa ter instalado o [Node.js](https://nodejs.org/en/download/), [Yarn](https://yarnpkg.com/) ou [Npm](https://docs.npmjs.com/cli/v6/commands/npm-install) e [Docker](https://www.docker.com/) para rodar este projeto.
+
+**Clone o projeto e acesse o arquivo**
+
+
+**Siga os passos abaixo**
 
 ```bash
-npm run dev
-# or
-yarn dev
+# Install as dependencias
+$ yarn
+
+# Com docker executado e inicializado, rode o comando abaixo para rodar um container docker com um imagem postgres dentro dele.
+$ docker run --name postgres-container -p 5432:5432 -e POSTGRES_PASSWORD=docker -e POSTGRES_USER=docker -d postgres
+
+# Após o container tiver rodando, abra terminal no root do projeto, rodar comando, isso vai configurar prisma dentro do projeto.
+$ yarn prisma generate
+
+# para gerar migration, da tabela no banco.
+$ yarn prisma migrate --name CREATE_USER
+
+# Run the web server
+$ yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+O app vai estar disponivel para acesso no seu broser na `http://localhost:3000`
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+### Observações
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+- Registro 'ADMIN', basta cadastrar e utilizar o email unico 'admin@admin', assim ele vai reconhecer na validação, e acessar o local correto.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-## Learn More
+### upgrade futuro
 
-To learn more about Next.js, take a look at the following resources:
+- Cadastro barbeiro
+- Agendamento Cliente
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## 📝 License
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
