@@ -8,6 +8,30 @@ export const Container = styled.section`
     padding: 0 120px;
     margin: 0 auto;
     max-width: 1920px;
+
+    @media(max-width: 1199px) {
+        gap: 50px;
+    }
+
+    @media(max-width: 1024px) {
+        height: auto;
+        flex-direction: column;
+        margin: 0 0 30px;
+    }
+
+    @media(max-width: 1024px) {
+        height: auto;
+        flex-direction: column;
+        margin: 0 0 30px;
+    }
+
+    @media(max-width: 699px) {
+        padding: 0 40px;
+    }
+
+    @media(max-width: 530px) {
+        padding: 0 20px;
+    }
 `;
 
 export const Slogan = styled.h1`
@@ -18,4 +42,23 @@ export const Slogan = styled.h1`
     line-height: 124px;
 
     color: #E04D01;
+
+    @media(max-width: 1365px) {
+        font-size: 80px;
+        line-height: 104px;
+    }
+
+    @media(max-width: 1199px) {
+        font-size: 60px;
+        line-height: 80px;
+    }
+    
+    @media(max-width: 1024px) {
+        text-align: center;
+    }
+    
+    @media(max-width: 600px) {
+        font-size: 40px;
+        line-height: 60px;
+    }
 `;

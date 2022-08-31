@@ -4,7 +4,7 @@ export default function Document() {
     return (
         <Html lang="pt-BR">
             <Head> 
-                <link rel="icon" href="/favicon.ico" />
+                <link rel="icon" href="/poste-de-barbeiro.ico" />
                 <meta name="language" content="pt-BR" />
                 <meta name="description" content="Barber Shop é um local especializado em barba, corte com máquina, corte com tesoura, sobrancelha" />
                 <meta name="author" content="Leandro Lombaldo" />
@@ -13,7 +13,7 @@ export default function Document() {
                 <meta property="og:site_name" content="Barber Shop" />
                 <meta property="og:locale" content="pt_BR" />
                 <meta property="og:description" content="Barber Shop é um local especializado em barba, corte com máquina, corte com tesoura, sobrancelha" />
-                <link rel="apple-touch-icon" href="/favicon.ico"></link>
+                <link rel="apple-touch-icon" href="/poste-de-barbeiro.ico"></link>
                 <meta name="theme-color" content="#2A2550"></meta>
 
 

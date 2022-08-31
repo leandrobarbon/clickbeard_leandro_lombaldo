@@ -9,16 +9,18 @@ export const Container = styled.section`
 
 export const ContainerScheduling = styled.section`
     width: 80%;
-    height: 70px;
+    height: auto;
     background: #2A2550;
     border-radius: 10px;    
 
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     justify-content: space-between;
     align-items: center;
-    padding: 0 40px;
+    padding: 20px 40px;
     gap: 20px;
 
+    & .form-control,
     & select {
         width: 100%;
         height:37px;
@@ -44,8 +46,14 @@ export const ContainerScheduling = styled.section`
 
 export const ContainerHistoricScheduled = styled.div`
     width: 80%;
-    display: flex;
-    gap: 200px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 20%;
+    margin-bottom: 70px;
+
+    @media(max-width: 1600px) {
+        gap: 10%;
+    }
 `;
 
 export const TableInfo = styled.div`
@@ -119,6 +127,14 @@ export const TableInfo = styled.div`
                 gap: 10px;
             }
         }
+    }
+
+    @media(max-width: 450px) {
+        width: 90%;
+    }
+
+    @media(max-width: 400px) {
+        width: 80%;
     }
 `;
 

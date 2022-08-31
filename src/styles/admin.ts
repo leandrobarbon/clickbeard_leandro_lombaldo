@@ -19,7 +19,29 @@ export const ContainerAgenda = styled.div`
 `;
 
 export const GroupButtonAgenda = styled.div`
-    
+    display: flex;
+    align-items: center;
+    width: 90%;
+    justify-content: flex-start;
+    gap: 40px;
+
+    & select {
+        width: fit-content;
+        height:37px;
+        background: #F9F9F9;
+        border-radius: 10px;
+        text-align: center;
+        padding: 0 22px;
+    }
+
+    & .form-control {
+        width: 160px !important;
+        height:37px;
+        background: #F9F9F9;
+        border-radius: 10px;
+        text-align: center;
+        padding: 0 22px;
+    }
 `;
 
 export const Agenda = styled.div`
@@ -39,6 +61,13 @@ export const Agenda = styled.div`
         & td {
             border-bottom: 1px solid #251D3A99;
             padding: 15px 0;
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 19px;
+            color: #FFF;
+            text-transform: capitalize;
         }
 
         & td:first-child {
@@ -68,28 +97,21 @@ export const ContainerCadastroBarbeiro = styled.div`
     align-items: center;
     gap: 40px;
     margin-top: 80px;
+    box-shadow: 10px 5px 5px #00000026;
 
 
     & > button {
-        width: 50%;
-        background: rgba(255, 119, 0, 0.7);
-        border-radius: 10px;
+        
+    }
 
-        font-family: 'Roboto';
-        font-style: normal;
-        font-weight: 700;
-        font-size: 16px;
-        line-height: 23px;
+    @media(max-width: 600px) {
+        width: 430px;
+        padding: 50px;
+    }
 
-        color: #FFFFFF;
-
-        padding: 16px 0;
-        border: none;
-        outline: none;
-
-        &:hover {
-            background: rgba(255, 119, 0);
-        }
+    @media(max-width: 500px) {
+        width: 335px;
+        padding: 50px 30px;
     }
 `;
 

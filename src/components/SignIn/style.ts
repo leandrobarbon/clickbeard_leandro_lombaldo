@@ -1,18 +1,33 @@
 import styled from "styled-components";
 
 export const Container = styled.form`
-    width: 612px;
-    height: 706px;
+    width: 535px;
+    height: fit-content;
+    padding: 60px 80px;
 
     background: #2A2550;
     border-radius: 10px;
-    padding: 0 87px;
 
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 40px;
+
+    transition: all 0.2s ease-in-out;
+
+    @media(max-width: 699px) {
+        width: fit-content;
+    }
+
+    @media(max-width: 600px) {
+        width: 100%;
+        padding: 60px 40px;
+    }
+
+    @media(max-width: 530px) {
+        padding: 60px 20px;
+    }
 
     & > button {
         width: 50%;

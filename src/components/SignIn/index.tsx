@@ -1,22 +1,31 @@
-import { useState, useEffect, FormEvent } from 'react';
+import { useState, FormEvent, useContext } from 'react';
+
+import { User } from 'models/user';
+
+
 import {
     Container,
     Title,
     InputText,
     Footer
 } from './style';
+import { AuthContext } from 'context/AuthContext';
 
 
 interface dadosClientProps {
-    nome: string,
+    name: string,
     email: string,
-    senha: string
+    password: string
 }
 
-export function SignIn() {
+export function SignInUp() {
     const [RegisterMe, setRegisterMe] = useState(false);
-    const [registed, setRegistrated] = useState([])
- 
+    const { signIn, signUp } = useContext(AuthContext)
+    const [formData, setFormData] = useState<dadosClientProps>({
+        name: '',
+        email: '',
+        password: '',
+    });
 
     const handleRouteRegister = (event: any) => {
         if (event.id === "cadastro") {
@@ -26,14 +35,33 @@ export function SignIn() {
         }
     }
 
+    const handleLogin = async (event: FormEvent) => {
+        event.preventDefault();
 
-
-    const handleLogin = () => {
-
+        try {
+            await signIn(formData.email, formData.password);
+        } catch (error: any) {
+            alert(error?.response?.data?.error.message)
+        }
     }
 
-    const handleSaveRegister = (event: FormEvent) => {
-         
+    const handleSaveRegister = async (event: FormEvent) => {
+        event.preventDefault();
+
+
+        const data: User = {
+            name: formData.name,
+            email: formData.email,
+            password: formData.password,
+        }
+
+        try {
+            await signUp(data);
+
+            alert('User created successfully!');
+        } catch (error: any) {
+            alert(error.response?.data?.error?.message)
+        }
     }
 
 
@@ -45,11 +73,23 @@ export function SignIn() {
                         <Title>LOGIN</Title>
                         <InputText>
                             EMAIL
-                            <input type="email" placeholder='email@email.com.br' />
+                            <input
+                                type="email"
+                                placeholder='email@email.com.br'
+                                value={formData.email}
+                                onChange={({ target }) => {
+                                    setFormData({ ...formData, email: target.value })
+                                }} />
                         </InputText>
                         <InputText>
                             SENHA
-                            <input type="password" placeholder='●●●●●●●●●●●' />
+                            <input
+                                type="password"
+                                placeholder='●●●●●●●●●●●'
+                                value={formData.password}
+                                onChange={({ target }) => {
+                                    setFormData({ ...formData, password: target.value })
+                                }} />
                             <button>Recuperar Senha</button>
                         </InputText>
 
@@ -65,7 +105,9 @@ export function SignIn() {
                             <input
                                 type="text"
                                 placeholder='nome'
-                                
+                                onChange={({ target }) => {
+                                    setFormData({ ...formData, name: target.value });
+                                }}
                             />
                         </InputText>
                         <InputText>
@@ -73,7 +115,9 @@ export function SignIn() {
                             <input
                                 type="email"
                                 placeholder='email@email.com.br'
-                                
+                                onChange={({ target }) => {
+                                    setFormData({ ...formData, email: target.value });
+                                }}
                             />
                         </InputText>
                         <InputText>
@@ -81,7 +125,9 @@ export function SignIn() {
                             <input
                                 type="password"
                                 placeholder='●●●●●●●●●●●'
-                                
+                                onChange={({ target }) => {
+                                    setFormData({ ...formData, password: target.value });
+                                }}
                             />
                         </InputText>
 

@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
 
-import { SignIn } from 'components/SignIn';
+import { SignInUp } from 'components/SignIn';
 
 import { 
   Container,
@@ -11,7 +11,7 @@ const Home: NextPage = () => {
   return (
     <Container>
       <Slogan>BARBER <br /> SHOP</Slogan>
-      <SignIn />
+      <SignInUp />
     </Container>
   )
 }

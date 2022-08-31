@@ -1,3 +1,4 @@
+import { AuthProvider } from 'context/AuthContext';
 import type { AppProps } from 'next/app'
 import Head from 'next/head';
 
@@ -14,7 +15,9 @@ function MyApp({ Component, pageProps }: AppProps) {
         <title>Barber Shop</title>
       </Head>
       <GlobalStyle />
-      <Component {...pageProps} />
+      <AuthProvider>
+        <Component {...pageProps} />
+      </AuthProvider>
     </>
   )
 }

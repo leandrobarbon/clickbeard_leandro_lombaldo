@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import Datetime from 'react-datetime';
+import 'moment/locale/pt-br';
+import "react-datetime/css/react-datetime.css";
 import { Navbar } from 'components/Navbar';
 import { Cancelar, Reagendar } from 'Icons';
 import {
@@ -16,11 +19,15 @@ export default function HomeCliente() {
 
     useEffect(() => {
         setDados(true)
-    },[])
+    }, [])
+
+    let inputProps = {
+        placeholder: '00/00/0000',
+    };
 
     return (
         <Container>
-            <Navbar page='homeCliente'/>
+            <Navbar page='home' setWhichRoute/>
             <ContainerScheduling>
                 <select name="" id="">
                     <option value="">Escolha horário</option>
@@ -28,9 +35,7 @@ export default function HomeCliente() {
                 <select name="" id="">
                     <option value="">Selecione especialidade</option>
                 </select>
-                <select name="" id="">
-                    <option value="">Escolha data</option>
-                </select>
+                <Datetime locale="pr-br" inputProps={ inputProps }/>
                 <select name="" id="">
                     <option value="">Selecione o barbeiro</option>
                 </select>
