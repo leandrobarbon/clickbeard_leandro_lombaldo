@@ -1,8 +1,19 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState, FormEvent } from 'react';
+import { GetServerSideProps } from 'next';
+
+import { createBarberService } from '../services/createBarberService'
+import { getAllBarbersService } from '../services/getAllBarbersService'
+import { addSuccessNotification } from '../components/Alert';
+
+import { User } from '../models/user';
+
+import { parseCookies } from 'nookies'
 import Datetime from 'react-datetime';
 import 'moment/locale/pt-br';
 import "react-datetime/css/react-datetime.css";
+
 import { Navbar } from 'components/Navbar';
+
 import {
     Container,
     ContainerAgenda,
@@ -14,6 +25,7 @@ import {
     GroupCheckBox,
     CheckBoxEspecialidade
 } from '../styles/admin';
+import { Loading } from 'components/Loading';
 
 const Hours = {
     'carlos': [
@@ -190,18 +202,22 @@ export default function Admin() {
 
     const [routeScheduleBarber, setRouteScheduleBarber] = useState(false);
     const [whichRoute, setWhichRoute] = useState(false)
-
+    const [isLoading, setIsLoading] = useState(false);
+    const [barbers, setBarbers] = useState<User[]>([])
     const [formRegisteredBarber, setFormRegisteredBarber] = useState({
         name: '',
+        email: 'barber@barber.com',
         age: '',
     })
 
     const [formSpeciality, setFormSpeciality] = useState({
-        corte_maquina: '',
-        corte_tesoura: '',
-        barba: '',
-        sobrancelha: ''
+        corte_maquina: 'corte maquina',
+        corte_tesoura: 'corte tesoura',
+        barba: 'barba',
+        sobrancelha: 'sobrancelha'
     })
+
+    const [specialties, setSpecialties] = useState<string[]>([]);
 
     const [barber, setBarber] = useState(Hours);
     const [barberSelected, setBarberSelected] = useState({})
@@ -214,6 +230,19 @@ export default function Admin() {
         event.preventDefault();
     }
 
+
+
+    const handleCreateBarber = async (event: FormEvent) => {
+        event.preventDefault();
+
+        const response = await createBarberService({ email: formRegisteredBarber.email, name: formRegisteredBarber.name, password: '', age: Number(formRegisteredBarber.age), isAdmin: false, isClient: false, isEmployer: true, specialty: specialties })
+
+
+
+        addSuccessNotification('Barber created!')
+
+    }
+
     useEffect(() => {
         if (whichRoute) {
             setRouteScheduleBarber(true)
@@ -222,19 +251,31 @@ export default function Admin() {
         }
     }, [whichRoute])
 
+
+    useEffect(() => {
+        const loadBarbers = async () => {
+            const response = await getAllBarbersService();
+
+            console.log('response', response.data)
+            setBarbers(response.data)
+        };
+
+        loadBarbers()
+    }, []);
+
+    console.log(barbers)
+
     return (
         <>
-            <Navbar page='admin' setWhichRoute={setWhichRoute}/>
+            <Navbar page='admin' setWhichRoute={setWhichRoute} />
             <Container>
                 {!routeScheduleBarber ? (
                     <ContainerAgenda>
                         <GroupButtonAgenda>
                             <select name="" id="" onChange={(e) => handleSelectBarberSchedule((e.target as any).value)}>
-                                <option value="">Selecione o barbeiro</option>
-                                <option value="carlos">Carlos</option>
-                                <option value="batista">Batista</option>
+                                {barbers.filter(barber => barber.isEmployer).map(barber => <option value={barber.name}>{barber.name}</option>)}
                             </select>
-                            <Datetime locale="pr-br" inputProps={ inputProps }/>
+                            <Datetime locale="pr-br" inputProps={inputProps} />
                         </GroupButtonAgenda>
                         <Agenda>
                             <table>
@@ -251,14 +292,14 @@ export default function Admin() {
                                                 return (
                                                     <tr key={hora.Hour}>
                                                         <td id={hora.Hour}>{hora.Hour}</td>
-                                                        <td> 
-                                                            {hora.name ? `Client - ${hora.name}` : ''} 
+                                                        <td>
+                                                            {hora.name ? `Client - ${hora.name}` : ''}
                                                             <br />
                                                             {
-                                                            hora.speciality?.barba || 
-                                                            hora.speciality?.corte_maquina ||
-                                                            hora.speciality?.corte_tesoura ||
-                                                            hora.speciality?.sobrancelha ? 'Especiality' : ''
+                                                                hora.speciality?.barba ||
+                                                                    hora.speciality?.corte_maquina ||
+                                                                    hora.speciality?.corte_tesoura ||
+                                                                    hora.speciality?.sobrancelha ? 'Especiality' : ''
                                                             }
                                                             {hora.speciality?.barba ? ` - ${hora.speciality?.barba}` : ''}
                                                             {hora.speciality?.corte_maquina ? ` - ${hora.speciality?.corte_maquina}` : ''}
@@ -277,7 +318,7 @@ export default function Admin() {
                         </Agenda>
                     </ContainerAgenda>
                 ) : (
-                    <ContainerCadastroBarbeiro>
+                    <ContainerCadastroBarbeiro onSubmit={handleCreateBarber}>
                         <Title>Cadastro Barber</Title>
                         <InputCadastro>
                             NOME
@@ -305,7 +346,9 @@ export default function Admin() {
                                     type="checkbox"
                                     name="corte-maquina"
                                     value={formSpeciality.corte_maquina}
-                                    onChange={handleCheckSpeciality}
+                                    onChange={({ target }) => {
+                                        setSpecialties([...specialties, target.value])
+                                    }}
                                 />
                                 CORTE COM MÁQUINA
                             </CheckBoxEspecialidade>
@@ -314,7 +357,9 @@ export default function Admin() {
                                     type="checkbox"
                                     name="corte-tesoura"
                                     value={formSpeciality.corte_tesoura}
-                                    onChange={handleCheckSpeciality}
+                                    onChange={({ target }) => {
+                                        setSpecialties([...specialties, target.value])
+                                    }}
                                 />
                                 CORTE COM TESOURA
                             </CheckBoxEspecialidade>
@@ -324,7 +369,7 @@ export default function Admin() {
                                     name="barba"
                                     value={formSpeciality.barba}
                                     onChange={({ target }) => {
-                                        setFormSpeciality({ ...formSpeciality, barba: target.value })
+                                        setSpecialties([...specialties, target.value])
                                     }}
                                 />
                                 BARBA
@@ -334,15 +379,42 @@ export default function Admin() {
                                     type="checkbox"
                                     name="sobrancelha"
                                     value={formSpeciality.sobrancelha}
-                                    onChange={handleCheckSpeciality}
+                                    onChange={({ target }) => {
+                                        setSpecialties([...specialties, target.value])
+                                    }}
                                 />
                                 SOBRANCELHA
                             </CheckBoxEspecialidade>
                         </GroupCheckBox>
-                        <button>CADASTRAR</button>
+                        <button>{isLoading ? <Loading /> : 'CADASTRAR'}</button>
                     </ContainerCadastroBarbeiro>
                 )}
             </Container>
         </>
     )
+}
+
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+    const { ['nextauth-user']: user } = parseCookies(context);
+
+    if (!user) {
+        return {
+            props: {},
+            redirect: '/'
+        }
+    }
+
+    const parsedUser = JSON.parse(user)?.user;
+
+    if (!parsedUser.isAdmin) {
+        return {
+            props: {},
+            redirect: '/home'
+        }
+    }
+
+    return {
+        props: {}
+    }
 }

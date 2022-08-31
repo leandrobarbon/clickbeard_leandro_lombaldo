@@ -83,7 +83,7 @@ export const Agenda = styled.div`
     } 
 `;
 
-export const ContainerCadastroBarbeiro = styled.div`
+export const ContainerCadastroBarbeiro = styled.form`
 
     background: #2A2550;
     border-radius: 10px;    
@@ -101,7 +101,27 @@ export const ContainerCadastroBarbeiro = styled.div`
 
 
     & > button {
-        
+        width: 50%;
+        background: rgba(255, 119, 0, 0.7);
+        border-radius: 10px;
+
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 23px;
+
+        color: #FFFFFF;
+
+        padding: 16px 0;
+        border: none;
+        outline: none;
+        display: flex;
+        justify-content: center;
+
+        &:hover {
+            background: rgba(255, 119, 0);
+        }
     }
 
     @media(max-width: 600px) {

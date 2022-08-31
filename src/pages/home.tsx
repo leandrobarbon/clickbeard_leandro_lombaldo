@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { GetServerSideProps } from 'next';
+import { parseCookies } from 'nookies'
 import Datetime from 'react-datetime';
 import 'moment/locale/pt-br';
 import "react-datetime/css/react-datetime.css";
@@ -27,7 +29,7 @@ export default function HomeCliente() {
 
     return (
         <Container>
-            <Navbar page='home' setWhichRoute/>
+            <Navbar page='home' />
             <ContainerScheduling>
                 <select name="" id="">
                     <option value="">Escolha horário</option>
@@ -35,7 +37,7 @@ export default function HomeCliente() {
                 <select name="" id="">
                     <option value="">Selecione especialidade</option>
                 </select>
-                <Datetime locale="pr-br" inputProps={ inputProps }/>
+                <Datetime locale="pr-br" inputProps={inputProps} />
                 <select name="" id="">
                     <option value="">Selecione o barbeiro</option>
                 </select>
@@ -104,4 +106,24 @@ export default function HomeCliente() {
             </ContainerHistoricScheduled>
         </Container>
     )
+}
+
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+    const { ['nextauth-user']: user } = parseCookies(context);
+
+
+
+    if (!user) {
+        return {
+            props: {},
+            redirect: '/'
+        }
+    }
+
+    const parsedUser = JSON.parse(user).user;
+
+    return {
+        props: {}
+    }
 }

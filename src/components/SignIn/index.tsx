@@ -1,7 +1,12 @@
 import { useState, FormEvent, useContext } from 'react';
 
+import { Loading } from '../Loading';
+import { addSuccessNotification, addErrorNotification } from '../Alert'
+
 import { User } from 'models/user';
 
+
+import { AuthContext } from 'context/AuthContext';
 
 import {
     Container,
@@ -9,7 +14,7 @@ import {
     InputText,
     Footer
 } from './style';
-import { AuthContext } from 'context/AuthContext';
+
 
 
 interface dadosClientProps {
@@ -20,7 +25,8 @@ interface dadosClientProps {
 
 export function SignInUp() {
     const [RegisterMe, setRegisterMe] = useState(false);
-    const { signIn, signUp } = useContext(AuthContext)
+    const { signIn, signUp } = useContext(AuthContext);
+    const [isLoading, setIsLoading] = useState(false);
     const [formData, setFormData] = useState<dadosClientProps>({
         name: '',
         email: '',
@@ -38,15 +44,22 @@ export function SignInUp() {
     const handleLogin = async (event: FormEvent) => {
         event.preventDefault();
 
+        setIsLoading(true)
+
         try {
             await signIn(formData.email, formData.password);
         } catch (error: any) {
             alert(error?.response?.data?.error.message)
+        } finally {
+            setIsLoading(false)
+
         }
     }
 
     const handleSaveRegister = async (event: FormEvent) => {
         event.preventDefault();
+
+        setIsLoading(true)
 
 
         const data: User = {
@@ -58,9 +71,14 @@ export function SignInUp() {
         try {
             await signUp(data);
 
-            alert('User created successfully!');
+            addSuccessNotification('User created successfully!');
+
+
         } catch (error: any) {
-            alert(error.response?.data?.error?.message)
+            addErrorNotification(error.response?.data?.error?.message)
+        } finally {
+            setIsLoading(false)
+
         }
     }
 
@@ -90,10 +108,10 @@ export function SignInUp() {
                                 onChange={({ target }) => {
                                     setFormData({ ...formData, password: target.value })
                                 }} />
-                            <button>Recuperar Senha</button>
+                            <button type='button'>Recuperar Senha</button>
                         </InputText>
 
-                        <button>LOGIN</button>
+                        <button>{isLoading ? <Loading type='spin' /> : 'LOGIN'}</button>
 
                         <Footer>Não tem cadastro? <span onClick={(e) => handleRouteRegister(e.target)} id="cadastro">Cadastra-me</span></Footer>
                     </Container>
@@ -131,7 +149,7 @@ export function SignInUp() {
                             />
                         </InputText>
 
-                        <button type='submit' onClick={handleSaveRegister}>CADASTRAR</button>
+                        <button type='submit' onClick={handleSaveRegister}>{isLoading ? <Loading type='spin' /> : 'CADASTRAR'}</button>
 
                         <Footer>Já tem cadastro? <span onClick={(e) => handleRouteRegister(e.target)} id="login">Acesse Login</span></Footer>
                     </Container>

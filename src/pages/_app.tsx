@@ -2,6 +2,8 @@ import { AuthProvider } from 'context/AuthContext';
 import type { AppProps } from 'next/app'
 import Head from 'next/head';
 
+import { AlertProvider } from '../components/Alert'
+
 import GlobalStyle from 'styles/global';
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -16,6 +18,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <GlobalStyle />
       <AuthProvider>
+        <AlertProvider />
         <Component {...pageProps} />
       </AuthProvider>
     </>

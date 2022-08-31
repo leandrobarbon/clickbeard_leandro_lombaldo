@@ -16,6 +16,14 @@ export const ContainerAdminTitle = styled.div`
     display: flex;
     align-items: center;
     gap: 72px;
+
+    button {
+        border: 0;
+    }
+
+    @media(max-width: 600px) {
+        gap: 0;
+    }
 `;
 
 export const ButtonRoute = styled.button`
@@ -197,4 +205,13 @@ export const IconBurguer = styled.div`
     @media(max-width: 1100px) {
         display: block;
     }
+`;
+
+export const ExchageDashboard = styled.div`
+    background-image: url('./assets/icons/ExchageDashboard.svg');
+    background-repeat: no-repeat;
+    width: 24px;
+    height: 18px;
+    cursor: pointer;
+    z-index: 2;
 `;

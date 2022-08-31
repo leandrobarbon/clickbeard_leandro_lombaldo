@@ -4,6 +4,6 @@ import axios from "axios";
 
 
 export const registerService = async (user: User) => {
-   const response:any = await axios.post('/api/register', { ...user })
+   const response = await axios.post('/api/register', { ...user })
    return response
 }

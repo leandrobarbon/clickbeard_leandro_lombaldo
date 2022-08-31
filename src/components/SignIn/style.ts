@@ -45,6 +45,8 @@ export const Container = styled.form`
         padding: 16px 0;
         border: none;
         outline: none;
+        display: flex;
+        justify-content: center;
 
         &:hover {
             background: rgba(255, 119, 0);
@@ -109,6 +111,8 @@ export const InputText = styled.label`
         margin-top: 10px;
     }
 `;
+
+ 
 
 export const Footer = styled.p`
     font-family: 'Roboto';

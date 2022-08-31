@@ -1,7 +1,7 @@
 export interface User {
    name: string,
    email: string,
-   specialties?: string[],
+   specialty?: string[],
    age?: number | null,
    password: string,
    isAdmin?: boolean,
